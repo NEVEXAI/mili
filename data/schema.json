@@ -1,1 +1,731 @@
-
+{
+  "version": "2.1-agglomeration",
+  "generated": "2026-08-04",
+  "total_sites": 336878,
+  "fields": [
+    "site_id",
+    "address",
+    "MATRICULE83",
+    "MUNICIPALITE",
+    "municipality_name",
+    "NO_ARROND_ILE_CUM",
+    "use_group",
+    "CODE_UTILISATION",
+    "LIBELLE_UTILISATION",
+    "CATEGORIE_UEF",
+    "assessment_record_count",
+    "is_condo_aggregate",
+    "NOMBRE_LOGEMENT",
+    "ANNEE_CONSTRUCTION",
+    "ETAGE_HORS_SOL",
+    "lot_area_sqft",
+    "assessment_building_area_sqft",
+    "assessment_coverage_pct",
+    "assessment_open_site_pct",
+    "planning_supportive",
+    "intensification",
+    "density_target",
+    "pum_land_use",
+    "opportunity_sector",
+    "opportunity_titles",
+    "opportunity_status",
+    "opportunity_scale",
+    "housing_area",
+    "nearest_metro",
+    "metro_distance_m",
+    "near_metro_800m",
+    "future_transit_distance_m",
+    "near_future_transit_800m",
+    "permit_count_5y",
+    "permit_count_10y",
+    "latest_permit_date",
+    "recent_permit_5y",
+    "street_name_count",
+    "street_segment_count",
+    "street_names",
+    "corner_lot_candidate",
+    "double_frontage_candidate",
+    "heritage_pum",
+    "heritage_legal",
+    "heritage_value_sector",
+    "heritage_interest_statement",
+    "wetland_flood_constraint",
+    "opportunity_score",
+    "constraint_risk",
+    "data_confidence",
+    "longitude",
+    "latitude"
+  ],
+  "field_definitions": [
+    {
+      "name": "address",
+      "label": "Address",
+      "type": "text",
+      "filterable": false
+    },
+    {
+      "name": "MATRICULE83",
+      "label": "Matricule",
+      "type": "text",
+      "filterable": true
+    },
+    {
+      "name": "MUNICIPALITE",
+      "label": "Municipality code",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "09",
+        "10",
+        "13",
+        "14",
+        "15",
+        "20",
+        "22",
+        "23",
+        "29",
+        "50"
+      ]
+    },
+    {
+      "name": "municipality_name",
+      "label": "Municipality",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Baie-D'Urfé",
+        "Beaconsfield",
+        "Côte-Saint-Luc",
+        "Dollard-des-Ormeaux",
+        "Dorval",
+        "Hampstead",
+        "L'Île-Dorval",
+        "Kirkland",
+        "Mont-Royal",
+        "Montréal-Est",
+        "Montréal-Ouest",
+        "Pointe-Claire",
+        "Sainte-Anne-de-Bellevue",
+        "Senneville",
+        "Westmount",
+        "Montréal"
+      ]
+    },
+    {
+      "name": "NO_ARROND_ILE_CUM",
+      "label": "Borough code",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "REM05",
+        "REM09",
+        "REM12",
+        "REM14",
+        "REM15",
+        "REM16",
+        "REM17",
+        "REM19",
+        "REM20",
+        "REM21",
+        "REM22",
+        "REM23",
+        "REM24",
+        "REM25",
+        "REM27",
+        "REM31",
+        "REM32",
+        "REM33",
+        "REM34",
+        "REM99"
+      ]
+    },
+    {
+      "name": "use_group",
+      "label": "Property use group",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Commercial",
+        "Cultural / Recreational",
+        "Manufacturing",
+        "Public / Institutional",
+        "Residential",
+        "Resource / Production",
+        "Services",
+        "Transportation / Utilities",
+        "Vacant / Other"
+      ]
+    },
+    {
+      "name": "CODE_UTILISATION",
+      "label": "Use code",
+      "type": "text",
+      "filterable": true
+    },
+    {
+      "name": "LIBELLE_UTILISATION",
+      "label": "Use description",
+      "type": "text",
+      "filterable": true
+    },
+    {
+      "name": "CATEGORIE_UEF",
+      "label": "Assessment category",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Condominium",
+        "Régulier"
+      ]
+    },
+    {
+      "name": "assessment_record_count",
+      "label": "Assessment records at site",
+      "type": "number",
+      "filterable": true,
+      "min": 1.0,
+      "max": 1172.0
+    },
+    {
+      "name": "is_condo_aggregate",
+      "label": "Condominium / multi-record aggregate",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "NOMBRE_LOGEMENT",
+      "label": "Existing dwellings",
+      "type": "number",
+      "filterable": true,
+      "min": 1.0,
+      "max": 3100.0
+    },
+    {
+      "name": "ANNEE_CONSTRUCTION",
+      "label": "Year built",
+      "type": "number",
+      "filterable": true,
+      "min": 1600.0,
+      "max": 9999.0
+    },
+    {
+      "name": "ETAGE_HORS_SOL",
+      "label": "Above-ground storeys",
+      "type": "number",
+      "filterable": true,
+      "min": 1.0,
+      "max": 45.0
+    },
+    {
+      "name": "lot_area_sqft",
+      "label": "Lot area (ft²)",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 58061996.68
+    },
+    {
+      "name": "assessment_building_area_sqft",
+      "label": "Assessment building area (ft²)",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 10194930.11
+    },
+    {
+      "name": "assessment_coverage_pct",
+      "label": "Assessment coverage proxy (%)",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 100.0
+    },
+    {
+      "name": "assessment_open_site_pct",
+      "label": "Open-site proxy (%)",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 100.0
+    },
+    {
+      "name": "planning_supportive",
+      "label": "Planning-supportive area",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "intensification",
+      "label": "PUM intensification",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Douce",
+        "Intermédiaire",
+        "Non applicable",
+        "Non couverte",
+        "Élevée"
+      ]
+    },
+    {
+      "name": "density_target",
+      "label": "PUM density target",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 400.0
+    },
+    {
+      "name": "pum_land_use",
+      "label": "PUM land use",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Activités diversifiées",
+        "Activités économiques",
+        "Agricole",
+        "Conservation",
+        "Grande emprise ou grande infrastructure publique",
+        "Mixte",
+        "Non couverte",
+        "Récréation et accès aux rives",
+        "Résidentiel"
+      ]
+    },
+    {
+      "name": "opportunity_sector",
+      "label": "Opportunity sector",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "housing_area",
+      "label": "Housing reference area",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "",
+        "Anjou",
+        "Baie-D'Urfé",
+        "Beaconsfield",
+        "Beaurivage",
+        "Bois-Francs",
+        "Cartierville",
+        "Cecil-P.-Newman",
+        "Centre",
+        "Centre-Nord",
+        "Chameran/Montpellier",
+        "Crémazie",
+        "Côte-Saint-Antoine",
+        "Côte-Saint-Luc",
+        "Côte-Saint-Paul",
+        "Desmarchais-Crawford",
+        "Dollard-Des Ormeaux",
+        "Dorval",
+        "Du College/Hodge",
+        "Dupéré",
+        "Dutrisac",
+        "Est",
+        "François-Perrault",
+        "Gabriel-Sagard",
+        "Grande-Prairie",
+        "Grenet",
+        "Guybourg",
+        "Hampstead",
+        "Hochelaga",
+        "Ile-des-Soeurs",
+        "Kirkland",
+        "L'Île-Bizard–Sainte-Geneviève",
+        "La Visitation",
+        "Lachine-Ouest",
+        "Longue-Pointe",
+        "Lorimier",
+        "Louis-Hébert",
+        "Louis-Riel",
+        "Loyola",
+        "Maisonneuve",
+        "Marc-Aurèle-Fortin",
+        "Marie-Victorin",
+        "Mile End",
+        "Milton-Parc",
+        "Mont-Royal",
+        "Montagne",
+        "Montréal-Est",
+        "Montréal-Ouest",
+        "Nicolas-Viel",
+        "Nouveau-Bordeaux",
+        "Ouest",
+        "Outremont",
+        "Parc-Extension",
+        "Parc-Jarry",
+        "Parc-Kent",
+        "Parc-Lafontaine",
+        "Parc-Laurier",
+        "Petite-Bourgogne",
+        "Petite-Côte",
+        "Pierrefonds-Est",
+        "Pierrefonds-Ouest",
+        "Pointe-Claire",
+        "Pointe-Saint-Charles",
+        "Pointe-aux-Trembles",
+        "Port-Maurice",
+        "Préfontaine",
+        "Père-Marquette",
+        "René-Goupil",
+        "René-Lévesque",
+        "Rivière-des-Prairies",
+        "Saint-Henri",
+        "Saint-Louis",
+        "Saint-Sulpice",
+        "Saint-Édouard",
+        "Sainte-Anne-de-Bellevue",
+        "Sainte-Lucie",
+        "Sainte-Marie",
+        "Sault-Saint-Louis",
+        "Sault-au-Récollet",
+        "Savane",
+        "Senneville",
+        "Snowdon",
+        "Tétreaultville",
+        "Upper Lachine",
+        "Verdun-Centre",
+        "Vieux-Lachine - Saint-Pierre",
+        "Vieux-Montréal",
+        "Vieux-Rosemont",
+        "Ville-Émard",
+        "Westmount",
+        "Édouard-Montpetit",
+        "Étienne Desmarteaux"
+      ]
+    },
+    {
+      "name": "nearest_metro",
+      "label": "Nearest metro",
+      "type": "category",
+      "filterable": true,
+      "values": [
+        "Station Angrignon",
+        "Station Assomption",
+        "Station Atwater",
+        "Station Beaubien",
+        "Station Beaudry",
+        "Station Berri-UQAM",
+        "Station Bonaventure",
+        "Station Cadillac",
+        "Station Cartier -Zone B",
+        "Station Champ-de-Mars",
+        "Station Charlevoix",
+        "Station Crémazie",
+        "Station Côte-Sainte-Catherine",
+        "Station Côte-Vertu",
+        "Station De l'Église",
+        "Station De la Concorde -Zone B",
+        "Station De la Savane",
+        "Station Du Collège",
+        "Station Frontenac",
+        "Station Georges-Vanier",
+        "Station Guy-Concordia",
+        "Station Henri-Bourassa",
+        "Station Honoré-Beaugrand",
+        "Station Jarry",
+        "Station Jean-Drapeau",
+        "Station Jean-Talon",
+        "Station Jolicoeur",
+        "Station Joliette",
+        "Station LaSalle",
+        "Station Langelier",
+        "Station Laurier",
+        "Station Lionel-Groulx",
+        "Station Longueuil-Université de Sherbrooke -Zone B",
+        "Station Lucien-L'Allier",
+        "Station McGill",
+        "Station Monk",
+        "Station Mont-Royal",
+        "Station Montmorency -Zone B",
+        "Station Namur",
+        "Station Papineau",
+        "Station Peel",
+        "Station Pie-IX",
+        "Station Place-Saint-Henri",
+        "Station Place-d'Armes",
+        "Station Place-des-Arts",
+        "Station Plamondon",
+        "Station Préfontaine",
+        "Station Radisson",
+        "Station Rosemont",
+        "Station Saint-Laurent",
+        "Station Sauvé",
+        "Station Sherbrooke",
+        "Station Snowdon",
+        "Station Square-Victoria–OACI",
+        "Station Vendôme",
+        "Station Verdun",
+        "Station Viau",
+        "Station Villa-Maria"
+      ]
+    },
+    {
+      "name": "metro_distance_m",
+      "label": "Metro distance (m)",
+      "type": "number",
+      "filterable": true,
+      "min": 15.49,
+      "max": 24968.53
+    },
+    {
+      "name": "near_metro_800m",
+      "label": "Within 800 m of metro",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "future_transit_distance_m",
+      "label": "Future transit distance (m)",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 4308.56
+    },
+    {
+      "name": "near_future_transit_800m",
+      "label": "Within 800 m of future transit",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "permit_count_5y",
+      "label": "Permits in 5 years",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 111.0
+    },
+    {
+      "name": "permit_count_10y",
+      "label": "Permits in 10 years",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 257.0
+    },
+    {
+      "name": "latest_permit_date",
+      "label": "Latest permit date",
+      "type": "text",
+      "filterable": true
+    },
+    {
+      "name": "recent_permit_5y",
+      "label": "Recent permit activity",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "street_name_count",
+      "label": "Street Name Count",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 30.0
+    },
+    {
+      "name": "street_segment_count",
+      "label": "Street Segment Count",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 109.0
+    },
+    {
+      "name": "corner_lot_candidate",
+      "label": "Corner-lot candidate",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "double_frontage_candidate",
+      "label": "Double-frontage candidate",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "heritage_pum",
+      "label": "PUM heritage",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "heritage_legal",
+      "label": "Legal heritage protection",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "heritage_value_sector",
+      "label": "Heritage-value sector",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "heritage_interest_statement",
+      "label": "Heritage-interest statement",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "wetland_flood_constraint",
+      "label": "Wetland/flood constraint",
+      "type": "boolean",
+      "filterable": true
+    },
+    {
+      "name": "opportunity_score",
+      "label": "Opportunity score",
+      "type": "number",
+      "filterable": true,
+      "min": 5.0,
+      "max": 100.0
+    },
+    {
+      "name": "constraint_risk",
+      "label": "Constraint risk",
+      "type": "number",
+      "filterable": true,
+      "min": 0.0,
+      "max": 100.0
+    },
+    {
+      "name": "data_confidence",
+      "label": "Data confidence",
+      "type": "number",
+      "filterable": true,
+      "min": 75.0,
+      "max": 100.0
+    }
+  ],
+  "chunks": [
+    {
+      "file": "data/chunks/sites_01.json",
+      "rows": 21055,
+      "bytes": 8728793,
+      "sha256": "b711f740a5f45b2509f7a1e969ad772cd7412a40853d3f623d5014191b012d92"
+    },
+    {
+      "file": "data/chunks/sites_02.json",
+      "rows": 21055,
+      "bytes": 8678953,
+      "sha256": "3936e7c972e1bc41a4b163a34ba398d221969518fd0530854a632f5227814e8a"
+    },
+    {
+      "file": "data/chunks/sites_03.json",
+      "rows": 21055,
+      "bytes": 8706048,
+      "sha256": "0a9df54acced953792873c1ffa83993587ba0edef35a9731ce0b385f74a45ddb"
+    },
+    {
+      "file": "data/chunks/sites_04.json",
+      "rows": 21055,
+      "bytes": 8673291,
+      "sha256": "3a848497f0eaca16f5f106bf44b8db8759c2232d6bf4ba36419ad642818c0325"
+    },
+    {
+      "file": "data/chunks/sites_05.json",
+      "rows": 21055,
+      "bytes": 8631983,
+      "sha256": "c015e30b31056a81c2eba9e66760764bfdb70a2d881b5cdc205fa1e36c19214b"
+    },
+    {
+      "file": "data/chunks/sites_06.json",
+      "rows": 21055,
+      "bytes": 8738594,
+      "sha256": "562af71465f9be131f407c09017bfd0618c8a40bd1293e84b44908ae5ddec786"
+    },
+    {
+      "file": "data/chunks/sites_07.json",
+      "rows": 21055,
+      "bytes": 8777228,
+      "sha256": "605982bb642d9b35e8dc512556cb05e57e504c1598b0ef51e6628b0c35cb91ea"
+    },
+    {
+      "file": "data/chunks/sites_08.json",
+      "rows": 21055,
+      "bytes": 8839883,
+      "sha256": "ffe6d9cf8526ff9566c05302b9f30f22ab2266d18fcd65d52ac9f98b8eb7a801"
+    },
+    {
+      "file": "data/chunks/sites_09.json",
+      "rows": 21055,
+      "bytes": 8844337,
+      "sha256": "5310b0c7f68d3140b7f24c7088b85bcf7db5d3ca9d51243757298c9da52b0cbc"
+    },
+    {
+      "file": "data/chunks/sites_10.json",
+      "rows": 21055,
+      "bytes": 8767644,
+      "sha256": "52c060e7d5f2c15643b0e67dd7489dd677d979e78709ac52256c673f0158c94c"
+    },
+    {
+      "file": "data/chunks/sites_11.json",
+      "rows": 21055,
+      "bytes": 8751554,
+      "sha256": "80ab1ea498deb329c713f1d7d8cca5bc573f7b2588bca6f29c347a23e3d930e2"
+    },
+    {
+      "file": "data/chunks/sites_12.json",
+      "rows": 21055,
+      "bytes": 8768591,
+      "sha256": "305e9186159173933c61b7797f4305405d1cd0ab21b678928038e7fc96fdb0f7"
+    },
+    {
+      "file": "data/chunks/sites_13.json",
+      "rows": 21055,
+      "bytes": 8786777,
+      "sha256": "e1802ffa9286a1d58e8e9aa3ca50260f08b22d96e1b92e33fa431359c1d0b2ee"
+    },
+    {
+      "file": "data/chunks/sites_14.json",
+      "rows": 21055,
+      "bytes": 8779374,
+      "sha256": "43655cd31a4227f23ae19fe33cafe4333b3fe9b2755a37da50d0e2e3b97fe2fa"
+    },
+    {
+      "file": "data/chunks/sites_15.json",
+      "rows": 21055,
+      "bytes": 8760380,
+      "sha256": "7d9491f8be902e8fdeb511278b2f5111d00f226aac9a199bc9c0198a4a61653b"
+    },
+    {
+      "file": "data/chunks/sites_16.json",
+      "rows": 21053,
+      "bytes": 8750348,
+      "sha256": "a2917ba6be6906bc025384736d399f389e565e850f6c3da433cf99a308d12827"
+    }
+  ],
+  "warning": "Preliminary screening only. Municipal planning data is not legal zoning, ownership, title or confirmed development rights.",
+  "edition": "MILI Explorer – Montréal Agglomeration Edition",
+  "region": "Entire Montréal agglomeration",
+  "municipalities": [
+    "Baie-D'Urfé",
+    "Beaconsfield",
+    "Côte-Saint-Luc",
+    "Dollard-des-Ormeaux",
+    "Dorval",
+    "Hampstead",
+    "L'Île-Dorval",
+    "Kirkland",
+    "Mont-Royal",
+    "Montréal-Est",
+    "Montréal-Ouest",
+    "Pointe-Claire",
+    "Sainte-Anne-de-Bellevue",
+    "Senneville",
+    "Westmount",
+    "Montréal"
+  ]
+}
