@@ -69,3 +69,15 @@ Leaflet, MarkerCluster, SheetJS, jsPDF and jsPDF-AutoTable load from public CDNs
 ## Important limitations
 
 The system remains a screening tool. It does not independently confirm legal zoning, ownership, title, assessment dollar values, taxes, servitudes, FAR, height, setbacks, subdivision rights or permitted unit yield.
+
+
+## Loading overlay correction
+
+Fixed a CSS specificity issue where `.busy { display:flex }` overrode the HTML `hidden` attribute.
+The loading overlay now disappears correctly when JavaScript sets `hidden = true`.
+
+Required rule:
+
+```css
+.busy[hidden] { display: none !important; }
+```
