@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="MILI Explorer 2.2 – Montréal Agglomeration property intelligence platform">
+  <title>MILI Explorer 2.2 – Montréal Agglomeration</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brandblock">
+    <b class="brand">MILI</b>
+    <div>
+      <h1>Montréal Agglomeration Edition <small>v2.2</small></h1>
+      <p>Dynamic property explorer covering every unique physical assessment site across the Montréal agglomeration.</p>
+    </div>
+  </div>
+  <div class="topactions">
+    <button id="savedBtn" class="secondary">Saved <span id="savedCount">0</span></button>
+    <button id="exportBtn">Export</button>
+  </div>
+</header>
+
+<div id="activeBar" class="activebar" hidden>
+  <div><strong>Active filters</strong><span id="activeChips"></span></div>
+  <button id="clearAllTop" class="link">Clear all</button>
+</div>
+
+<main>
+  <aside>
+    <section class="search-section">
+      <label>Smart property search
+        <div class="search-wrap">
+          <input id="globalSearch" type="search" autocomplete="off" placeholder="Address, matricule, municipality, use…">
+          <button id="clearSearch" class="search-clear" type="button" aria-label="Clear search">×</button>
+          <div id="searchSuggestions" class="suggestions" hidden></div>
+        </div>
+      </label>
+      <p class="help">Partial addresses, complete mailing addresses and minor street-name typos are supported.</p>
+      <div class="presets">
+        <button data-preset="all">All</button>
+        <button data-preset="residential">Residential 1–2</button>
+        <button data-preset="v1">V1 Screen</button>
+        <button data-preset="premium">Premium</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="head">
+        <h2>Dynamic filters</h2>
+        <button id="clearBtn" class="link">Clear</button>
+      </div>
+      <input id="filterSearch" type="search" placeholder="Find a filter…">
+      <div class="filter-toolbar">
+        <button id="expandAll" class="mini secondary">Expand all</button>
+        <button id="collapseAll" class="mini secondary">Collapse all</button>
+      </div>
+      <p class="help">Generated automatically from <code>data/schema.json</code>. Results update automatically.</p>
+      <div id="dynamicFilters"></div>
+      <button id="applyBtn" class="full">Apply now</button>
+    </section>
+
+    <section>
+      <div class="summary">
+        <div><strong id="loadedCount">0</strong><span>loaded</span></div>
+        <div><strong id="resultCount">0</strong><span>matches</span></div>
+        <div><strong id="activeCount">0</strong><span>filters</span></div>
+        <div><strong id="avgOpportunity">—</strong><span>avg score</span></div>
+      </div>
+      <p id="status" class="help">Loading schema…</p>
+    </section>
+  </aside>
+
+  <div class="workspace">
+    <div class="mapbar">
+      <button id="fitResults" class="secondary">Fit map to results</button>
+      <span id="renderNote">Map shows top 3,000 matches.</span>
+    </div>
+    <div id="map"></div>
+    <section class="results">
+      <div class="resultHead">
+        <div>
+          <h2>Ranked matches</h2>
+          <p>Top 250 cards are displayed. Excel includes all matches; PDF includes a summary and the top 250.</p>
+        </div>
+        <label>Sort
+          <select id="sortField">
+            <option value="opportunity_score">Opportunity</option>
+            <option value="constraint_risk">Constraint risk</option>
+            <option value="lot_area_sqft">Lot area</option>
+            <option value="metro_distance_m">Metro distance</option>
+          </select>
+        </label>
+      </div>
+      <div id="cards"></div>
+    </section>
+  </div>
+</main>
+
+<dialog id="detailDialog">
+  <button class="close">×</button>
+  <div id="detail"></div>
+</dialog>
+
+<dialog id="savedDialog">
+  <button class="close">×</button>
+  <h2>Saved properties</h2>
+  <div id="savedList"></div>
+</dialog>
+
+<dialog id="exportDialog">
+  <button class="close">×</button>
+  <h2>Export results</h2>
+  <p class="help">Excel exports every matching property. PDF creates a formatted report with the filter summary and top 250 ranked properties.</p>
+  <div class="export-grid">
+    <button id="exportExcel" class="export-choice">
+      <strong>Excel (.xlsx)</strong>
+      <span>All matching properties and current filter criteria</span>
+    </button>
+    <button id="exportPdf" class="export-choice">
+      <strong>PDF report</strong>
+      <span>Search summary, active filters and top 250 properties</span>
+    </button>
+  </div>
+</dialog>
+
+<div id="busy" class="busy" hidden><div class="spinner"></div><span>Updating results…</span></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
