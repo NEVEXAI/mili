@@ -5,6 +5,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,att
 map.addLayer(cluster);
 
 let schema,fields,defs,idx,rows=[],matches=[],filters={},markers=new Map();
+let currentPage=1;const PAGE_SIZE=250;
 let saved=JSON.parse(localStorage.getItem('mili_v22_saved')||localStorage.getItem('mili_v21_saved')||'{}');
 let searchIndex=[],vocabulary=new Set(),searchTimer,filterTimer,currentSuggestion=-1;
 const SEARCH_FIELDS=['address','MATRICULE83','municipality_name','LIBELLE_UTILISATION','use_group','housing_area','street_names','site_id'];
@@ -110,7 +111,7 @@ function removeFilter(f){
 function filterOK(r){for(const[f,a]of Object.entries(filters)){const v=get(r,f);if(a.type==='number'){const n=Number(v);if(!Number.isFinite(n)||(a.min!==undefined&&n<a.min)||(a.max!==undefined&&n>a.max))return false}else if(a.type==='boolean'){if(Boolean(v)!==a.value)return false}else if(a.type==='category'){if(String(v)!==a.value)return false}else if(!normalizeSearch(v).includes(normalizeSearch(a.value)))return false}return true}
 function sortRows(searching=false){if(searching){matches.sort((a,b)=>b.score-a.score||Number(get(b.row,'opportunity_score')||0)-Number(get(a.row,'opportunity_score')||0));return}const f=$('sortField').value;matches.sort((a,b)=>{const av=Number(get(a.row,f)),bv=Number(get(b.row,f));return f==='metro_distance_m'||f==='constraint_risk'?(Number.isFinite(av)?av:Infinity)-(Number.isFinite(bv)?bv:Infinity):(Number.isFinite(bv)?bv:-Infinity)-(Number.isFinite(av)?av:-Infinity)})}
 function apply(){
-  busy(true);clearTimeout(filterTimer);
+  busy(true);clearTimeout(filterTimer);currentPage=1;
   requestAnimationFrame(()=>setTimeout(()=>{
     collect();const q=$('globalSearch').value.trim(),plan=queryPlan(q);matches=[];
     for(let i=0;i<rows.length;i++){const r=rows[i];if(!filterOK(r))continue;const score=q?searchScore(r,i,plan):0;if(!q||score>=0)matches.push({row:r,score})}
@@ -127,10 +128,31 @@ function render(){
     m.bindPopup(`<b>${esc(get(r,'address'))}</b><br>${esc(get(r,'municipality_name'))} · ${esc(get(r,'use_group'))}<br>${fmt(get(r,'lot_area_sqft'))} ft² · Opportunity ${score}/100`);
     m.on('click',()=>detail(r));cluster.addLayer(m);markers.set(get(r,'site_id'),m);
   });
-  $('cards').innerHTML=matches.slice(0,250).map(x=>card(x.row,x.score)).join('');
-  document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{const x=matches.find(y=>get(y.row,'site_id')===c.dataset.id);if(!x)return;detail(x.row);const m=markers.get(c.dataset.id);if(m){map.setView(m.getLatLng(),16);m.openPopup()}});
+  renderPage();
   $('status').textContent=`${matches.length.toLocaleString()} matches across the Montréal agglomeration.`;
   $('renderNote').textContent=`Map shows ${Math.min(matches.length,3000).toLocaleString()} of ${matches.length.toLocaleString()} matches.`;
+  setTimeout(()=>map.invalidateSize(),60);
+}
+function renderPage(){
+  const totalPages=Math.max(1,Math.ceil(matches.length/PAGE_SIZE));
+  currentPage=Math.min(Math.max(1,currentPage),totalPages);
+  const start=(currentPage-1)*PAGE_SIZE;
+  const end=Math.min(start+PAGE_SIZE,matches.length);
+  $('cards').innerHTML=matches.slice(start,end).map(x=>card(x.row,x.score)).join('');
+  document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{const x=matches.find(y=>get(y.row,'site_id')===c.dataset.id);if(!x)return;detail(x.row);const m=markers.get(c.dataset.id);if(m){map.setView(m.getLatLng(),16);m.openPopup()}});
+  const firstShown=matches.length?start+1:0;
+  $('pageStatus').textContent=matches.length?`Showing ${firstShown.toLocaleString()}–${end.toLocaleString()} of ${matches.length.toLocaleString()}`:'No matching properties';
+  $('pageNumber').textContent=`Page ${currentPage.toLocaleString()} of ${totalPages.toLocaleString()}`;
+  $('prevPage').disabled=currentPage<=1;
+  $('nextPage').disabled=currentPage>=totalPages;
+  $('pageJump').max=totalPages;
+  $('pageJump').value=currentPage;
+}
+function changePage(page){
+  const totalPages=Math.max(1,Math.ceil(matches.length/PAGE_SIZE));
+  currentPage=Math.min(Math.max(1,Number(page)||1),totalPages);
+  renderPage();
+  document.querySelector('.results')?.scrollTo({top:0,behavior:'smooth'});
 }
 function missingCount(r){return['NOMBRE_LOGEMENT','lot_area_sqft','assessment_building_area_sqft','ANNEE_CONSTRUCTION','metro_distance_m','pum_land_use'].filter(f=>get(r,f)===null||get(r,f)===undefined||get(r,f)==='').length}
 function card(r,relevance=0){
@@ -229,7 +251,7 @@ $('clearSearch').onclick=()=>{$('globalSearch').value='';hideSuggestions();apply
 $('exportBtn').onclick=()=>$('exportDialog').showModal();
 $('exportExcel').onclick=exportExcel;
 $('exportPdf').onclick=exportPdf;
-$('sortField').onchange=()=>{sortRows(Boolean($('globalSearch').value.trim()));render()};
+$('sortField').onchange=()=>{currentPage=1;sortRows(Boolean($('globalSearch').value.trim()));render()};
 $('globalSearch').oninput=()=>{clearTimeout(searchTimer);showSuggestions();searchTimer=setTimeout(apply,350)};
 $('globalSearch').onfocus=()=>{if($('globalSearch').value.trim().length>=2)showSuggestions()};
 $('globalSearch').onkeydown=e=>{
@@ -245,5 +267,10 @@ $('savedBtn').onclick=()=>{$('savedList').innerHTML=Object.values(saved).length?
 $('expandAll').onclick=()=>document.querySelectorAll('.filter-group').forEach(x=>x.open=true);
 $('collapseAll').onclick=()=>document.querySelectorAll('.filter-group').forEach(x=>x.open=false);
 $('fitResults').onclick=()=>{const ms=[...markers.values()];if(ms.length)map.fitBounds(L.featureGroup(ms).getBounds().pad(.05))};
+$('prevPage').onclick=()=>changePage(currentPage-1);
+$('nextPage').onclick=()=>changePage(currentPage+1);
+$('pageJump').onchange=e=>changePage(e.target.value);
+window.addEventListener('resize',()=>setTimeout(()=>map.invalidateSize(),80));
+
 
 load().catch(e=>{$('status').textContent='Load error: '+e.message;console.error(e);busy(false)});
