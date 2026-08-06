@@ -85,7 +85,7 @@
       <div class="resultHead">
         <div>
           <h2>Ranked matches</h2>
-          <p>Top 250 cards are displayed. Excel includes all matches; PDF includes a summary and the top 250.</p>
+          <p>Results are shown 250 at a time with pagination. Excel includes all matches; PDF includes a summary and the top 250.</p>
         </div>
         <label>Sort
           <select id="sortField">
@@ -97,6 +97,17 @@
         </label>
       </div>
       <div id="cards"></div>
+      <nav class="pagination" aria-label="Property result pages">
+        <button id="prevPage" class="secondary">Previous</button>
+        <div class="page-info">
+          <strong id="pageStatus">Showing results</strong>
+          <span id="pageNumber">Page 1 of 1</span>
+        </div>
+        <label class="jump-label">Jump to page
+          <input id="pageJump" type="number" min="1" value="1">
+        </label>
+        <button id="nextPage" class="secondary">Next</button>
+      </nav>
     </section>
   </div>
 </main>
